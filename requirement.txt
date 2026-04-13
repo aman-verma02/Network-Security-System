@@ -1,1 +1,3 @@
-# Here the requirement of the project
+pandas
+numpy 
+python-dotenv
