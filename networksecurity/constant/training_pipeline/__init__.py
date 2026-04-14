@@ -9,24 +9,14 @@ import sys  # Used for system-level operations (rarely used here, but helpful in
 Defining common constant variables for training pipeline
 These values will be reused across different modules (ingestion, training, etc.)
 '''
+TARGET_COLUMN = "Result"  # Name of the target column in the dataset
+PIPELINE_NAME: str = "NetworkSecurity" # Name of the pipeline (used for folder structure / logging / tracking)
+ARTIFACT_DIR: str = "Artifacts"  # Root folder where all artifacts (outputs) will be stored
+FILE_NAME: str = "phisingData.csv"  # Raw dataset file name
+TRAIN_FILE_NAME: str = "train.csv" # Processed training dataset file
+TEST_FILE_NAME: str = "test.csv"  # Processed testing dataset file
 
-# Target column in dataset (what we want to predict)
-TARGET_COLUMN = "Result"
-
-# Name of the pipeline (used for folder structure / logging / tracking)
-PIPELINE_NAME: str = "NetworkSecurity"
-
-# Root folder where all artifacts (outputs) will be stored
-ARTIFACT_DIR: str = "Artifacts"
-
-# Raw dataset file name
-FILE_NAME: str = "phisingData.csv"
-
-# Processed training dataset file
-TRAIN_FILE_NAME: str = "train.csv"
-
-# Processed testing dataset file
-TEST_FILE_NAME: str = "test.csv"
+SCHEMA_FILE_PATH = os.path.join("data_schema", "schema.yaml")
 
 
 """
@@ -34,21 +24,20 @@ Data ingestion related constants
 Naming convention: DATA_INGESTION_<something>
 This helps organize constants by pipeline stage
 """
+DATA_INGESTION_COLLECTION_NAME: str = "NetworkData"  # MongoDB collection name (where data is stored)
+DATA_INGESTION_DATABASE_NAME: str = "JACKAI"  # MongoDB database name
+DATA_INGESTION_DIR_NAME: str = "data_ingestion" # Folder name for ingestion stage inside artifacts
+DATA_INGESTION_FEATURE_STORE_DIR: str = "feature_store" # Folder where raw data is stored after fetching from DB
+DATA_INGESTION_INGESTED_DIR: str = "ingested" # Folder where processed/split data is stored
+DATA_INGESTION_TRAIN_TEST_SPLIT_RATION: float = 0.2 # Train-test split ratio (20% test, 80% train)
 
-# MongoDB collection name (where data is stored)
-DATA_INGESTION_COLLECTION_NAME: str = "NetworkData"
 
-# MongoDB database name
-DATA_INGESTION_DATABASE_NAME: str = "JACKAI"
-
-# Folder name for ingestion stage inside artifacts
-DATA_INGESTION_DIR_NAME: str = "data_ingestion"
-
-# Folder where raw data is stored after fetching from DB
-DATA_INGESTION_FEATURE_STORE_DIR: str = "feature_store"
-
-# Folder where processed/split data is stored
-DATA_INGESTION_INGESTED_DIR: str = "ingested"
-
-# Train-test split ratio (20% test, 80% train)
-DATA_INGESTION_TRAIN_TEST_SPLIT_RATION: float = 0.2
+"""
+Data validation related constants
+Naming convention: DATA_VALIDATION_<something>
+"""
+DATA_VALIDATION_DIR_NAME: str = "data_validation" # Folder name for validation stage inside artifacts   
+DATA_VALIDATION_VALID_DIR: str = "validated" # Folder where validated data is stored
+DATA_VALIDATION_INVALID_DIR: str = "invalid" # Folder where invalid data is stored
+DATA_VALIDATION_DRIFT_REPORT_DIR: str = "drift_report" # Folder where drift report is stored
+DATA_VALIDATION_DRIFT_REPORT_FILE_NAME: str = "report.yaml" # Name of the drift report file

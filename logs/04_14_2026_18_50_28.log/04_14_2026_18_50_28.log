@@ -1,0 +1,15 @@
+[2026-04-14 18:50:29,117] 19 root - INFO - Initiate the data ingestion
+[2026-04-14 18:50:29,118] 95 root - INFO - Exporting collection data as pandas dataframe
+[2026-04-14 18:50:44,297] 98 root - INFO - Save data in feature store
+[2026-04-14 18:50:44,297] 68 root - INFO - Entered split_data_as_train_test method of Data_Ingestion class
+[2026-04-14 18:50:44,298] 72 root - INFO - Performed train test split on the dataframe
+[2026-04-14 18:50:44,298] 73 root - INFO - Exited split_data_as_train_test method of Data_Ingestion class
+[2026-04-14 18:50:44,298] 78 root - INFO - Exporting train and test file path.
+[2026-04-14 18:50:44,321] 88 root - INFO - Exported train and test file path.
+[2026-04-14 18:50:44,321] 21 root - INFO - Completed the data ingestion
+[2026-04-14 18:50:44,321] 24 root - INFO - Initiate the data validation
+[2026-04-14 18:50:44,330] 40 root - INFO - Required number of columns: 31
+[2026-04-14 18:50:44,330] 41 root - INFO - Data frame has columns: 31
+[2026-04-14 18:50:44,330] 40 root - INFO - Required number of columns: 31
+[2026-04-14 18:50:44,330] 41 root - INFO - Data frame has columns: 31
+[2026-04-14 18:50:44,383] 33 root - INFO - Completed the data validation
