@@ -1,8 +1,7 @@
 # Built-in libraries
 import os   # Used for file and directory operations (paths, folders)
 import sys  # Used for system-level operations (rarely used here, but helpful in pipelines)
-
-
+import numpy as np
 
 
 '''
@@ -41,3 +40,20 @@ DATA_VALIDATION_VALID_DIR: str = "validated" # Folder where validated data is st
 DATA_VALIDATION_INVALID_DIR: str = "invalid" # Folder where invalid data is stored
 DATA_VALIDATION_DRIFT_REPORT_DIR: str = "drift_report" # Folder where drift report is stored
 DATA_VALIDATION_DRIFT_REPORT_FILE_NAME: str = "report.yaml" # Name of the drift report file
+
+
+"""
+Data transformation related constants
+Naming convention: DATA_TRANSFORMATION_<something>
+""" 
+DATA_TRANSFORMATION_DIR_NAME: str = "data_transformation" # Folder name for transformation stage inside artifacts
+DATA_TRANSFORMATION_TRANSFORMED_DATA_DIR: str = "transformed" # Folder where transformed data is stored 
+DATA_TRANSFORMATION_TRANSFORMED_OBJECT_DIR: str = "transformed_object" # Folder where transformed object is stored
+
+## KKN imputer to replace nan values
+DATA_TRANSFORMATION_IMPUTER_PARAMS: dict = {
+    "missing_value": np.nan,
+    "n_neighours": 3,
+    "weights": "uniform"
+
+}
