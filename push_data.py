@@ -29,8 +29,9 @@ class NetworkDataExtract():
     def csv_to_json_convertor(self, file_path): 
         try: 
             data = pd.read_csv(file_path)
-            data.reset_index(drop=True, inplace=True)
-            records = list(json.loads(data.T.to_json()).values())
+            data.reset_index(drop=True, inplace=True)    # droping the index and and storing it thats why inplace = true
+            records = list(json.loads(data.T.to_json()).values())   # """In simple terms, this entire line is transforming structured tabular data into a format that is easy to store or transmit, especially for systems like databases (e.g., MongoDB) or APIs that expect data in JSON-like record format."""
+            ## we can also use this "records = data.to_dict(orient="records")"
             return records
         except Exception as e : 
             raise  NetworkSecurityException(e,sys)
