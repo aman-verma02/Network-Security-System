@@ -9,6 +9,13 @@ from networksecurity.utils.ml_utils.model.estimator import NetworkModel
 from networksecurity.utils.main_utils.utils import load_numpy_array_data, load_object, save_object, evaluate_models
 from networksecurity.utils.ml_utils.metric.classification_metric import get_classification_score
 import mlflow
+import dagshub
+dagshub.init(repo_owner='aman-verma02', repo_name='Network-Security-System', mlflow=True)
+
+# import mlflow
+# with mlflow.start_run():
+#   mlflow.log_param('parameter name', 'value')
+#   mlflow.log_metric('metric name', 1)
 
 
 from sklearn.linear_model import LogisticRegression
@@ -42,7 +49,7 @@ class ModelTrainer:
                 mlflow.log_metric("f1_score", f1_score)
                 mlflow.log_metric("precision_score", precision_score)
                 mlflow.log_metric("recall_score", recall_score)
-                mlflow.sklearn.log_model(best_model, "model")
+                mlflow.sklearn.log_model(best_model, name="model")
         except Exception as e:
             raise NetworkSecurityException(e, sys)
 
@@ -117,7 +124,7 @@ class ModelTrainer:
 
             network_model = NetworkModel(preprocessor=preprocessor, model=best_model)
             save_object(self.model_trainer_config.trained_model_file_path, obj=network_model)
-
+            save_object("final_model/model.pkl", best_model)
             ## Model Trainer Artifact
             model_trainer_artifact = ModelTrainerArtifact(
                 trained_model_file_path=self.model_trainer_config.trained_model_file_path,

@@ -73,6 +73,7 @@ class DataTransformation:
 
     
     def initiate_data_transformation(self) -> DataTransformationArtifact:
+        print(type(self.data_validation_artifact))
         logging.info(f"Entered initiate_data_transformation method of DataTransformation class")
         try:
             logging.info("Starting data transformation")
@@ -110,6 +111,9 @@ class DataTransformation:
             save_numpy_array_data( self.data_transformation_config.transformed_test_file_path, array=  test_arr)
             save_object(self.data_transformation_config.transformed_object_file_path, obj = preprocessor_object)
 
+            save_object("final_model/preprocessor.pkl", preprocessor_object)
+
+            logging.info("Completed data transformation")
 
             ## preparing artifacts 
             data_transdormation_artifact = DataTransformationArtifact(
