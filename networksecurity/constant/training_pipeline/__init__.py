@@ -15,6 +15,9 @@ FILE_NAME: str = "phisingData.csv"  # Raw dataset file name
 TRAIN_FILE_NAME: str = "train.csv" # Processed training dataset file
 TEST_FILE_NAME: str = "test.csv"  # Processed testing dataset file
 
+SAVED_MODEL_DIR = os.path.join("saved_models")
+MODEL_FILE_NAME = "model.pkl"
+
 SCHEMA_FILE_PATH = os.path.join("data_schema", "schema.yaml")
 
 
@@ -58,3 +61,16 @@ DATA_TRANSFORMATION_IMPUTER_PARAMS: dict = {
     "weights": "uniform"
 
 }
+
+DATA_TRANFORMATION_TRAIN_FILE_PATH: str = "train.npy"
+DATA_TRANFORMATION_TEST_FILE_PATH: str = "test.npy"
+
+"""
+Model trainer related constants
+Naming convention: MODEL_TRAINER_<something>
+"""
+MODEL_TRAINER_DIR_NAME: str = "model_trainer" # Folder name for training stage inside artifacts
+MODEL_TRAINER_TRAINED_MODEL_DIR: str = "trained_model" # Folder where trained model is stored
+MODEL_TRAINER_TRAINED_MODEL_NAME: str = "model.pkl" # Name of the trained model
+MODEL_TRAINER_EXPECTED_SCORE: float = 0.6
+MODEL_TRAINER_OVER_FIITING_UNDER_FIIITING_THRESHOLD: float = 0.05
