@@ -8,7 +8,7 @@ from networksecurity.entity.config_entity import ModelTrainerConfig
 from networksecurity.utils.ml_utils.model.estimator import NetworkModel
 from networksecurity.utils.main_utils.utils import load_numpy_array_data, load_object, save_object, evaluate_models
 from networksecurity.utils.ml_utils.metric.classification_metric import get_classification_score
-
+import mlflow
 
 
 from sklearn.linear_model import LogisticRegression
@@ -30,7 +30,23 @@ class ModelTrainer:
             self.data_transformation_artifact = data_transformation_artifact
         except Exception as e : 
             raise NetworkSecurityException(e,sys)
-        
+    
+
+    def track_mlflow(self, best_model, classification_metric):
+        try:
+            with mlflow.start_run():
+                f1_score = classification_metric.f1_score
+                precision_score = classification_metric.precision_score
+                recall_score = classification_metric.recall_score
+                mlflow.log_params(best_model.get_params())
+                mlflow.log_metric("f1_score", f1_score)
+                mlflow.log_metric("precision_score", precision_score)
+                mlflow.log_metric("recall_score", recall_score)
+                mlflow.sklearn.log_model(best_model, "model")
+        except Exception as e:
+            raise NetworkSecurityException(e, sys)
+
+
 
 
     def train_model(self, X_train, y_train, X_test, y_test):
@@ -84,12 +100,14 @@ class ModelTrainer:
             y_train_pred = best_model.predict(X_train)
             classification_train_metric = get_classification_score(y_true=y_train, y_pred=y_train_pred)
             
-            ## Track the ML FLow
-
+            ## Track the experiments with ML FLow
+            self.track_mlflow(best_model, classification_train_metric)
 
             y_test_pred = best_model.predict(X_test)
             classification_test_metric = get_classification_score(y_true =y_test, y_pred=y_test_pred)
-
+            
+            ## Track the experiments with ML FLow
+            self.track_mlflow(best_model, classification_train_metric)
             preprocessor = load_object(file_path=self.data_transformation_artifact.transformed_object_file_path)
 
             model_dir_path = os.path.dirname(self.model_trainer_config.trained_model_file_path)
