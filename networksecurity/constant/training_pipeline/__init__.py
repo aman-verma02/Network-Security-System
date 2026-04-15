@@ -49,11 +49,12 @@ Naming convention: DATA_TRANSFORMATION_<something>
 DATA_TRANSFORMATION_DIR_NAME: str = "data_transformation" # Folder name for transformation stage inside artifacts
 DATA_TRANSFORMATION_TRANSFORMED_DATA_DIR: str = "transformed" # Folder where transformed data is stored 
 DATA_TRANSFORMATION_TRANSFORMED_OBJECT_DIR: str = "transformed_object" # Folder where transformed object is stored
+PREPROCESSING_OBJECT_FILE_NAME: str = "preprocessing.pkl" # Name of the preprocessing object file
 
 ## KKN imputer to replace nan values
 DATA_TRANSFORMATION_IMPUTER_PARAMS: dict = {
-    "missing_value": np.nan,
-    "n_neighours": 3,
+    "missing_values": np.nan,
+    "n_neighbors": 3,
     "weights": "uniform"
 
 }
