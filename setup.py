@@ -45,7 +45,7 @@ setup(
     name='NetworkSecurity',
     version='0.0.1',
     author="Mac Trek",
-    author_email="aksvbpl@gmail.com",
+    author_email="trekmac@gmail.com",
     packages=find_packages(),
     install_requires=get_requirements()
 )

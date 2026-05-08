@@ -7,22 +7,18 @@ from dotenv import load_dotenv
 load_dotenv()
 
 MONGODB_URL = os.getenv("MONGODB_URL")
-print(MONGODB_URL)
 
 import pymongo
 from networksecurity.exception.exception import NetworkSecurityException
 from networksecurity.logging.logger import logging
 from networksecurity.pipeline.training_pipeline import TrainingPipeline
 from networksecurity.utils.ml_utils.model.estimator import NetworkModel
-
-
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, File, UploadFile, Request
 from uvicorn import run as app_run
 from fastapi.responses import Response
 from starlette.responses import RedirectResponse
 import pandas as pd
-
 from networksecurity.utils.main_utils.utils import load_object
 
 client = pymongo.MongoClient(MONGODB_URL, tlsCAFile=ca)
@@ -75,11 +71,11 @@ async def predict_route(request: Request, file: UploadFile = File(...)):
         preprocessor  = load_object(file_path=os.path.join("final_model", "preprocessor.pkl"))
         model = load_object(file_path=os.path.join("final_model", "model.pkl"))
         network_model = NetworkModel(preprocessor=preprocessor, model=model)
-        print(df.iloc[0])
+        # print(df.iloc[0])
         y_pred = network_model.predict(df)
-        print(y_pred)
+        # print(y_pred)
         df['predictions'] = y_pred
-        print(df['predictions'])
+        # print(df['predictions'])
         
         #df['predicted_column'].replace(-1, 0)
         #return df.to_json() 

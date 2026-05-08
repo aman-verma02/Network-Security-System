@@ -14,10 +14,8 @@ ARTIFACT_DIR: str = "Artifacts"  # Root folder where all artifacts (outputs) wil
 FILE_NAME: str = "phisingData.csv"  # Raw dataset file name
 TRAIN_FILE_NAME: str = "train.csv" # Processed training dataset file
 TEST_FILE_NAME: str = "test.csv"  # Processed testing dataset file
-
 SAVED_MODEL_DIR = os.path.join("saved_models")
 MODEL_FILE_NAME = "model.pkl"
-
 SCHEMA_FILE_PATH = os.path.join("data_schema", "schema.yaml")
 
 
