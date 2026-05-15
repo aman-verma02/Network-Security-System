@@ -4,3 +4,23 @@ venv/
 Artifacts/
 logs/
 mlruns/
+
+
+# Data files 
+Network_Data/*.csv
+final_models/*.pkl
+
+# Pyhton 
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyi
+*.py
+.env
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Streamlit
+.streamlit/secrets.toml
