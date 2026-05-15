@@ -1,3 +1,6 @@
+## File Name: push_data.py
+## Description: This file contains code to push data from csv file to mongodb database. It has two main functions, one to convert csv to json and another to insert data into mongodb. It uses pymongo library to connect to mongodb and insert data. It also uses pandas and json libraries to read csv file and convert it to json format. It also uses certifi library to get the certificate for secure connection to mongodb. It also uses dotenv library to load environment variables from .env file. It also uses custom exception handling and logging for better error management and debugging. The main function at the end demonstrates how to use the NetworkDataExtract class to read a csv file and push its data to mongodb. This file is useful for data ingestion stage of the training pipeline, where we need to fetch data from external sources and store it in a database for further processing and analysis.
+
 import os
 import sys
 import json
