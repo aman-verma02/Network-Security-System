@@ -6,17 +6,11 @@ logs/
 mlruns/
 
 
-# Data files 
-Network_Data/*.csv
-final_models/*.pkl
-
-# Pyhton 
+# Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-*.pyi
-*.py
 .env
 
 # Notebooks
@@ -24,3 +18,16 @@ __pycache__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Data files
+Network_Data/*.csv
+
+# Model files
+final_model/*.pkl
+
+# Logs
+logs/
+*.log
+
+# OS
+.DS_Store
