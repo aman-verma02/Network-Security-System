@@ -11,4 +11,9 @@ dagshub
 fastapi
 uvicorn
 python-multipart
+xgboost
+imbalanced-learn
+shap
+torch
+streamlit
 # -e .
