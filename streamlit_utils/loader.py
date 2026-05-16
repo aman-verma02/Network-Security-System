@@ -11,23 +11,13 @@
 # @st.cache_resource runs load_models() ONCE and keeps it in memory.
 
 import pickle
+import torch
 import streamlit as st
+from networksecurity.components.anomaly_detector import AutoEncoder, AnomalyDetector
 
 
 @st.cache_resource
 def load_models():
-    """
-    Loads all 4 artifacts from final_model/ directory.
-
-    Returns:
-        model         : trained sklearn/XGBoost model (model.pkl)
-        preprocessor  : fitted StandardScaler (preprocessor.pkl)
-        autoencoder   : trained AnomalyDetector with threshold (autoencoder.pkl)
-        feature_names : list of 40 selected feature names (feature_names.pkl)
-
-    Raises:
-        Streamlit error and stops app if any file is missing.
-    """
     try:
         with open("final_model/model.pkl", "rb") as f:
             model = pickle.load(f)
@@ -35,11 +25,30 @@ def load_models():
         with open("final_model/preprocessor.pkl", "rb") as f:
             preprocessor = pickle.load(f)
 
-        with open("final_model/autoencoder.pkl", "rb") as f:
-            autoencoder = pickle.load(f)
-
         with open("final_model/feature_names.pkl", "rb") as f:
             feature_names = pickle.load(f)
+
+        # Load meta dict (threshold + config) — pure Python, no CUDA
+        with open("final_model/autoencoder_meta.pkl", "rb") as f:
+            meta = pickle.load(f)
+
+        # Rebuild AnomalyDetector from scratch on CPU
+        autoencoder = AnomalyDetector(
+            input_dim=meta['input_dim'],
+            epochs=meta['epochs'],
+            batch_size=meta['batch_size'],
+            lr=meta['lr'],
+            threshold=meta['threshold']
+        )
+
+        # Load weights onto CPU
+        autoencoder.model.load_state_dict(
+            torch.load(
+                'final_model/autoencoder_weights.pth',
+                map_location=torch.device('cpu')
+            )
+        )
+        autoencoder.model.eval()
 
         return model, preprocessor, autoencoder, feature_names
 

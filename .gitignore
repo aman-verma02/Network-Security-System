@@ -31,3 +31,7 @@ logs/
 
 # OS
 .DS_Store
+
+logs/
+valid_data/
+prediction_output/
