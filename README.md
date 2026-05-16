@@ -5,7 +5,7 @@ An end-to-end Machine Learning system that detects network intrusions in real-ti
 ---
 
 ## 🔴 Live Demo
-👉 [Click here to open the live app](YOUR_STREAMLIT_URL_HERE)
+👉 [Click here to open the live app](https://network-security-system.streamlit.app/)
 
 ---
 

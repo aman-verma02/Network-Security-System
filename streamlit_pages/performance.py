@@ -32,9 +32,9 @@ def render():
     # ── Metrics ──
     # UPDATE THESE with your actual numbers from Colab output
     col1, col2, col3 = st.columns(3)
-    col1.metric("Accuracy", "98.7%")
-    col2.metric("F1 Score", "98.4%")
-    col3.metric("ROC-AUC", "99.2%")
+    col1.metric("Accuracy", "99.93%")
+    col2.metric("F1 Score", "99.91%")
+    col3.metric("ROC-AUC", "100%")
 
     st.markdown("---")
 
