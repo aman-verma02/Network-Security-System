@@ -30,8 +30,7 @@ from networksecurity.utils.main_utils.utils import save_object
 # AUTOENCODER ARCHITECTURE
 # ─────────────────────────────────────────────
 
-class AutoEncoder(nn.Module):
-    """
+"""
     A simple feedforward Autoencoder with two parts:
 
     ENCODER: Compresses input features into a small latent representation
@@ -46,41 +45,49 @@ class AutoEncoder(nn.Module):
     Args:
         input_dim (int): Number of input features (matches your selected features count)
     """
-
+class AutoEncoder(nn.Module):
+    """
+    Improved Autoencoder with BatchNorm and Dropout.
+    Architecture matches the model trained on Colab.
+    
+    Encoder: input_dim → 64 → 32 → 16 → 8 (bottleneck)
+    Decoder: 8 → 16 → 32 → 64 → input_dim
+    
+    BatchNorm: stabilizes training
+    Dropout: prevents overfitting
+    """
     def __init__(self, input_dim: int):
         super(AutoEncoder, self).__init__()
 
-        # ENCODER: progressively compresses features
-        # 40 → 32 → 16 → 8 (bottleneck)
         self.encoder = nn.Sequential(
-            nn.Linear(input_dim, 32),   # compress from input_dim to 32
-            nn.ReLU(),                   # activation — adds non-linearity
-            nn.Linear(32, 16),           # compress from 32 to 16
+            nn.Linear(input_dim, 64),
+            nn.BatchNorm1d(64),
             nn.ReLU(),
-            nn.Linear(16, 8)             # bottleneck — most compressed representation
+            nn.Dropout(0.2),
+            nn.Linear(64, 32),
+            nn.BatchNorm1d(32),
+            nn.ReLU(),
+            nn.Linear(32, 16),
+            nn.ReLU(),
+            nn.Linear(16, 8)
         )
 
-        # DECODER: reconstructs original features from compressed form
-        # 8 → 16 → 32 → 40 (mirror of encoder)
         self.decoder = nn.Sequential(
-            nn.Linear(8, 16),            # expand from 8 to 16
+            nn.Linear(8, 16),
             nn.ReLU(),
-            nn.Linear(16, 32),           # expand from 16 to 32
+            nn.Linear(16, 32),
+            nn.BatchNorm1d(32),
             nn.ReLU(),
-            nn.Linear(32, input_dim)     # reconstruct back to original feature size
+            nn.Dropout(0.2),
+            nn.Linear(32, 64),
+            nn.BatchNorm1d(64),
+            nn.ReLU(),
+            nn.Linear(64, input_dim)
         )
 
     def forward(self, x):
-        """
-        Forward pass:
-        1. Encode input to compressed latent vector
-        2. Decode latent vector back to original size
-        Returns reconstructed input — should be close to original if normal traffic
-        """
-        encoded = self.encoder(x)
-        decoded = self.decoder(encoded)
-        return decoded
-
+        """Encode input to bottleneck then decode back to original size."""
+        return self.decoder(self.encoder(x))
 
 # ─────────────────────────────────────────────
 # ANOMALY DETECTOR COMPONENT
