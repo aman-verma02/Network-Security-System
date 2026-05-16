@@ -5,7 +5,6 @@ Artifacts/
 logs/
 mlruns/
 
-
 # Python
 __pycache__/
 *.pyc
@@ -21,9 +20,6 @@ __pycache__/
 
 # Data files
 Network_Data/*.csv
-
-# Model files
-final_model/*.pkl
 
 # Logs
 logs/
