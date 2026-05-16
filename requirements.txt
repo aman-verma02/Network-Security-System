@@ -18,4 +18,5 @@ imbalanced-learn
 shap
 torch
 streamlit
+dill
 # -e .
