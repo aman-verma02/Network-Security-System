@@ -33,16 +33,17 @@ class SHAPExplainer:
     2. Generate a bar chart — overall feature importance
     3. Generate a waterfall chart — single prediction explanation
     4. Generate a summary plot — across all predictions
-
-    Works with any tree-based sklearn or XGBoost model.
-    (Random Forest, XGBoost, GradientBoosting, DecisionTree)
-
-    Args:
-        model         : trained sklearn/XGBoost model loaded from model.pkl
-        feature_names : list of feature names loaded from feature_names.pkl
     """
 
     def __init__(self, model, feature_names: list):
+        """
+        Initializes the SHAPExplainer with the trained model and feature names.
+        Args:
+            model: The trained machine learning model (e.g., Random Forest, XGBoost)
+            feature_names: A list of feature names corresponding to the input features used by the model
+        Returns:
+            None
+        """
         try:
             self.model = model
             self.feature_names = feature_names

@@ -16,10 +16,17 @@ class NetworkModel:
             raise NetworkSecurityException(e, sys)
 
     def predict(self, x):
+        """
+        Predict the output using the preprocessor and model.
+        Args:
+            x: Input data for prediction.
+        Returns:
+            Predicted output.
+        """
         try:
             x_transformed = self.preprocessor.transform(x)
-            y_hat = self.model.predict(x_transformed)
-            return y_hat
+            y_predicted = self.model.predict(x_transformed)
+            return y_predicted
         except Exception as e:
             raise NetworkSecurityException(e, sys)
 

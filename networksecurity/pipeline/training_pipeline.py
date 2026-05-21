@@ -169,8 +169,8 @@ class TrainingPipeline:
         self, data_transformation_artifact: DataTransformationArtifact
     ) -> dict:
         """
-        Stage 5: Train PyTorch Autoencoder for anomaly detection.
-
+        Stage 5:
+        - Train PyTorch Autoencoder for anomaly detection.
         - Loads the SAME transformed numpy arrays used by ModelTrainer
           (no extra processing needed — data is already scaled)
         - Trains Autoencoder on benign samples only

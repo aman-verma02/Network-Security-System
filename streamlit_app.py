@@ -31,7 +31,8 @@ st.set_page_config(
 def render_sidebar():
     """
     Renders sidebar with project info and file uploader.
-    Returns uploaded file object or None.
+    Returns:
+        The uploaded file object or None.
     """
     st.sidebar.title("🛡️ Network Security System")
     st.sidebar.markdown(

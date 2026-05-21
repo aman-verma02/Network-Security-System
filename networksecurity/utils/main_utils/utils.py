@@ -43,6 +43,11 @@ def save_numpy_array_data(file_path: str, array: np.array):
     Save numpy array data to file 
     file_path : str location of file to save
     array: np.array data to save
+    Args:        
+        file_path (str): The path where the numpy array will be saved.
+        array (np.array): The numpy array to be saved.
+    Returns:
+        None
     """
 
     try : 
@@ -56,6 +61,14 @@ def save_numpy_array_data(file_path: str, array: np.array):
     
 
 def save_object(file_path: str, obj: object) -> None: 
+    """
+    Save a Python object to a file using pickle.
+    Args:
+        file_path (str): The path where the object will be saved.
+        obj (object): The Python object to be saved.
+    Returns:
+        None
+    """
     try: 
         logging.info("Entered the save_object method of MainUtils class")
         os.makedirs(os.path.dirname(file_path), exist_ok=True)
@@ -69,6 +82,13 @@ def save_object(file_path: str, obj: object) -> None:
 
 ## function to load object 
 def load_object(file_path: str) -> object:
+    """
+    Load a Python object from a file using pickle.
+    Args:
+        file_path (str): The path where the object is saved.
+    Returns:
+        object: The Python object loaded from the file.
+    """
     try: 
         if not os.path.exists(file_path): 
             raise Exception(f"The file: {file_path} is not exists")
@@ -82,8 +102,10 @@ def load_object(file_path: str) -> object:
 def load_numpy_array_data(file_path: str) -> np.array: 
     """
     Load numpy array data from file
-    file_path: str location of file to load
-    return: np.array data loaded
+    Args: 
+        file_path: str location of file to load
+    Returns: 
+        np.array data loaded
     """
 
     try: 
@@ -95,6 +117,20 @@ def load_numpy_array_data(file_path: str) -> np.array:
 
 
 def evaluate_models(X_train, y_train, X_test, y_test, models:dict, param:dict):
+    """
+    This function evaluates multiple machine learning models using GridSearchCV to find the best hyperparameters for each model. It then fits the models with the best parameters and calculates the R2 score for both training and testing datasets.
+
+    Args:        
+        X_train: Training features
+        y_train: Training target
+        X_test: Testing features
+        y_test: Testing target
+        models: A dictionary of machine learning models to evaluate
+        param: A dictionary of hyperparameters for each model to be used in GridSearchCV.
+
+    Returns:
+        A dictionary containing the R2 score for each model on the testing dataset.
+    """
     try:
         report = {}
         
